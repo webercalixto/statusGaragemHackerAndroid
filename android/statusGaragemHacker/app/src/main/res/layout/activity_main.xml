@@ -5,8 +5,26 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
 
-    <TextView android:text="Perguntand00o...." android:layout_width="wrap_content"
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:src="@drawable/logogaragem"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/estado" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Abrindo...."
+        android:id="@+id/estado"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:phoneNumber="true"
+        android:textSize="42sp" />
 
 </RelativeLayout>

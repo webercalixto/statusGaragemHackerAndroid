@@ -1,6 +1,7 @@
 package br.com.selfwork.www.statusgaragemhacker;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,36 +23,39 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         estado=(TextView)findViewById(R.id.estado);
-        estado.setText("Perguntao ao garagem se está aberto....");
+        estado.setText("Perguntando ao garagem se está aberto....");
         status.execute("");
 
     }
-
 
     private class thStatus extends AsyncTask<String, Void, String> {
         String retorno;
         @Override
         protected String doInBackground(String... urls) {
             try {
-                URL url = new URL("http://garagemhacker.org/status.txxt");
+                URL url = new URL("http://garagemhacker.org/status.txt");
                 BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
                 String str;
-                while ((str = in.readLine()) != null) {
-                    retorno = str;
-                }
+                while ((str = in.readLine()) != null)
+                    retorno = str+"!";
                 in.close();
-            } catch (MalformedURLException e) {
-                retorno = "erro!";
-            } catch (IOException e) {
-                retorno = "erro!";
-            }
+                } catch (MalformedURLException e) {
+                    retorno = "erro!";
+                } catch (IOException e) {
+                    retorno = "erro!";
+                }
             return "ok";
         }
-        // onPostExecute displays the results of the AsyncTask.
+
         @Override
         protected void onPostExecute(String result) {
             retorno = retorno.substring(0, 1).toUpperCase() + retorno.substring(1);
             estado.setText(retorno);
+            if(retorno.equals("Aberto!"))
+                estado.setTextColor(Color.BLUE);
+            else
+                estado.setTextColor(Color.RED);
+            estado.append("!");
         }
     }
 
